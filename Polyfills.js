@@ -7,19 +7,16 @@ const usingMap = nums.map((nums, index, arr) => {
 console.log(nums);
 console.log("Map:", usingMap);
 
-
 const usingFilter = nums.filter((nums, index, arr) => {
   return nums < 4;
 });
 console.log("Filter:", usingFilter);
-
 
 // if there is no initial value, it takes first element of array as value for prev
 const usingReduce = nums.reduce((prev, curr, index, arr) => {
   return prev + curr;
 }, 0);
 console.log("Reducer:", usingReduce);
-
 
 // Custom/Polyfill Map Function
 Array.prototype.myMap = function (cb) {
@@ -36,7 +33,6 @@ const CustomMap = nums.myMap((nums, i, arr) => {
 
 console.log("CustomMap:", CustomMap);
 
-
 // Custom/Polyfill Filter Function
 Array.prototype.myFilter = function (cb) {
   let temp = [];
@@ -51,7 +47,6 @@ const CustomFilter = nums.myFilter((nums, i, arr) => {
 });
 
 console.log("CustomFilter:", CustomFilter);
-
 
 // Custom/Polyfill Reducer Function
 Array.prototype.myReduce = function (cb, initialValue) {
@@ -80,3 +75,65 @@ const forEachResult = arr.forEach((arr, i) => {
 });
 
 console.log("Result:", mapResult, forEachResult, arr);
+
+// Coding Question
+// 1 Return only name of students in capital
+
+let students = [
+  { name: "Achal", rollNumber: 31, marks: 90 },
+  { name: "Jenny", rollNumber: 32, marks: 55 },
+  { name: "Bob", rollNumber: 33, marks: 35 },
+  { name: "Harsh", rollNumber: 34, marks: 70 },
+];
+
+const name = students.map((items, i) => {
+  return items.name.toLocaleUpperCase();
+});
+
+console.log("Name:", name);
+
+// 2 Return only details of Those Student who scored more than 60 marks
+
+const ScoreMoreThan80 = students.filter((items, i) => {
+  return items.marks >= 60;
+});
+
+console.log("ScoreMoreThan:", ScoreMoreThan80);
+
+// Sum of marks of all student
+
+const sum = students.reduce((prev, curr, i, arr) => {
+  return prev + curr.marks;
+}, 0);
+
+console.log("Total Sum:", sum);
+
+// 3 Return only names of students who scored more than 60
+
+const data1 = students
+  .filter((items, i) => {
+    return items.marks > 60;
+  })
+  .map((items, i) => {
+    return items.name;
+  });
+
+console.log("Return Data:", data1);
+
+// Return total marks for student with marks,greater than 60 after 20 marks have been added to scored less than 60
+
+const data2 = students
+  .map((items) => {
+    if (items.marks < 60) {
+      items.marks = items.marks + 20;
+    }
+    return items;
+  })
+  .filter((items) => {
+    return items.marks > 60;
+  })
+  .reduce((prev, curr, index, arr) => {
+    return prev + curr.marks;
+  }, 0);
+
+console.log("Data2:", data2);
